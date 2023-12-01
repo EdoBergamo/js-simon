@@ -1,17 +1,31 @@
 // Function that returns a random number between min and max
 function getRandomNumber(min, max) {
+  // Check if 'min' and 'max' values are valid
+  if (typeof min !== 'number' || typeof max !== 'number' || min < 0 || max <= min) {
+    console.error('Valori non validi per min e max.');
+  }
+  
   return Math.floor(Math.random() * (max - min + 1) + min);
 }
 
 // Function to generate an array of 5 unique random numbers between 0 and 100
 function generateRandomNumbers() {
   let numbers = [];
+  const maxAttempts = 200; // To avoid infinite loops
+  let attempts = 0;
+
   while (numbers.length < 5) {
     let randomNumber = getRandomNumber(0, 100);
+    attempts++;
 
     // Adds the random number to the array only if it's not already present
     if (!numbers.includes(randomNumber)) {
       numbers.push(randomNumber);
+    }
+
+    // Check if attempts is greater or equals to maxAttempts
+    if (attempts >= maxAttempts) {
+      console.error('Impossibile generare numeri casuali univoci.');
     }
   }
   return numbers;
@@ -20,6 +34,12 @@ function generateRandomNumbers() {
 // Function to display the generated numbers within an HTML Element
 function displayNumbers(numbers) {
   let numbersDiv = document.getElementById('numbers');
+
+  // If HTML Element does not exists throw and error
+  if (!numbersDiv) {
+    console.error('Elemento HTML non trovato.');
+  }
+
   numbersDiv.innerHTML = `Numeri: <strong>${numbers.join(' ')}</strong>`;
 }
 
@@ -27,6 +47,11 @@ function displayNumbers(numbers) {
 function getUserInput(callback, userNumbers = [], index = 0) {
   let numbersDiv = document.getElementById('numbers');
   numbersDiv.style.display = 'none';
+
+  // If HTML Element does not exists throw and error
+  if (!numbersDiv) {
+    console.error('Elemento HTML non trovato.');
+  }
 
   // Delays user input by 100 milliseconds
   setTimeout(function () {
@@ -58,6 +83,12 @@ function compareNumbers(randomNumbers, userNumbers) {
 function updateCountdown(seconds) {
   let countdownDiv = document.getElementById('countdown');
   countdownDiv.innerHTML = `<i class="fas fa-stopwatch"></i> ${seconds}s`;
+
+  // If HTML Element does not exists throw and error
+  if (!countdownDiv) {
+    throw new Error('Elemento HTML non trovato.');
+  }
+
   if (seconds === 0) {
     countdownDiv.textContent = ''
   }
@@ -65,6 +96,10 @@ function updateCountdown(seconds) {
 
 // Function to handle the entire process
 function startGame() {
+  // *--------------------------------------------------*
+  // * TODO: Implement Try Catch Block to handle Errors *
+  // *--------------------------------------------------*
+
   // Generate 5 unique random numbers and display them
   let randomNumbers = generateRandomNumbers();
   displayNumbers(randomNumbers);
