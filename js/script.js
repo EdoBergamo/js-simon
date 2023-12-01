@@ -11,7 +11,7 @@ function generateRandomNumbers() {
 
     // Adds the random number to the array only if it's not already present
     if (!numbers.includes(randomNumber)) {
-      numbers.push(randomNumber)
+      numbers.push(randomNumber);
     }
   }
   return numbers;
@@ -29,13 +29,13 @@ function getUserInput(callback) {
   numbersDiv.style.display = 'none';
 
   // Delays user input by 100 milliseconds
-  setTimeout(function() {
+  setTimeout(function () {
     let userNumbers = [];
     for (let i = 0; i < 5; i++) {
       let number = parseInt(prompt(`Inserisci il numero ${(i + 1)}`));
       userNumbers.push(number);
     }
-    
+
     numbersDiv.style.display = 'block';
 
     // Calls the callback function with user input
@@ -55,27 +55,33 @@ function compareNumbers(randomNumbers, userNumbers) {
   return correctNumbers;
 }
 
-// Generate 5 unique random numbers and display them
-let randomNumbers = generateRandomNumbers();
-displayNumbers(randomNumbers);
+// Function to handle the entire process
+function startGame() {
+  // Generate 5 unique random numbers and display them
+  let randomNumbers = generateRandomNumbers();
+  displayNumbers(randomNumbers);
 
-// After 30 secondsl, asks the user to input 5 numbers and compares them with the generated ones
-setTimeout(function() {
-  document.getElementById('numbers').innerText = '';
+  // After 30 seconds, asks the user to input 5 numbers and compares them with the generated ones
+  setTimeout(function () {
+    document.getElementById('numbers').innerText = '';
 
-  getUserInput(function(userNumbers) {
-    let correctNumbers = compareNumbers(randomNumbers, userNumbers);
+    getUserInput(function (userNumbers) {
+      let correctNumbers = compareNumbers(randomNumbers, userNumbers);
 
-    /*
-     * Shows a message to the user based on the guessed numbers
-     * Using if structure instead of Thernary Operator
-    */
-    if (correctNumbers.length == 1) {
-      alert(`Hai indovinato ${correctNumbers.length} numero: ${correctNumbers}`); // Output -> Hai indovinato 1 numero: 34
-    } else if (correctNumbers.length > 0 && correctNumbers.length !== 1) {
-      alert(`Hai indovinato ${correctNumbers.length} numeri: ${correctNumbers.join(', ')}`); // Output -> Hai indovinato 4 numeri: 1, 2, 3, 4
-    } else {
-      alert('Nessun numero indovinato. Ritenta!'); // Output -> Nessun numero indovinato. Ritenta!
-    }
-  });
-}, 30000);
+      /*
+       * Shows a message to the user based on the guessed numbers
+       * Using if structure instead of Thernary Operator
+      */
+      if (correctNumbers.length == 1) {
+        alert(`Hai indovinato ${correctNumbers.length} numero: ${correctNumbers}`); // Output -> Hai indovinato 1 numero: 34
+      } else if (correctNumbers.length > 0 && correctNumbers.length !== 1) {
+        alert(`Hai indovinato ${correctNumbers.length} numeri: ${correctNumbers.join(', ')}`); // Output -> Hai indovinato 4 numeri: 1, 2, 3, 4
+      } else {
+        alert('Nessun numero indovinato. Ritenta!'); // Output -> Nessun numero indovinato. Ritenta!
+      }
+    });
+  }, 30000);
+}
+
+// Start the game
+startGame();
