@@ -20,7 +20,7 @@ function generateRandomNumbers() {
 // Function to display the generated numbers within an HTML Element
 function displayNumbers(numbers) {
   let numbersDiv = document.getElementById('numbers');
-  numbersDiv.innerText = 'Numeri: ' + numbers.join(' ');
+  numbersDiv.innerHTML = `Numeri: <strong>${numbers.join(' ')}</strong>`;
 }
 
 // Function to get user input via prompts to enter 5 numbers
@@ -32,7 +32,7 @@ function getUserInput(callback) {
   setTimeout(function() {
     let userNumbers = [];
     for (let i = 0; i < 5; i++) {
-      let number = parseInt(prompt('Inserisci il numero ' + (i + 1)));
+      let number = parseInt(prompt(`Inserisci il numero ${(i + 1)}`));
       userNumbers.push(number);
     }
     
@@ -71,11 +71,11 @@ setTimeout(function() {
      * Using if structure instead of Thernary Operator
     */
     if (correctNumbers.length == 1) {
-      alert('Hai indovinato ' + correctNumbers.length + ' numero: ' + correctNumbers); // Output -> Hai indovinato 1 numero: 34
+      alert(`Hai indovinato ${correctNumbers.length} numero: ${correctNumbers}`); // Output -> Hai indovinato 1 numero: 34
     } else if (correctNumbers.length > 0 && correctNumbers.length !== 1) {
-      alert('Hai indovinato ' + correctNumbers.length + ' numeri: ' + correctNumbers.join(', ')); // Output -> Hai indovinato 4 numeri: 1, 2, 3, 4
+      alert(`Hai indovinato ${correctNumbers.length} numeri: ${correctNumbers.join(', ')}`); // Output -> Hai indovinato 4 numeri: 1, 2, 3, 4
     } else {
       alert('Nessun numero indovinato. Ritenta!'); // Output -> Nessun numero indovinato. Ritenta!
     }
   });
-}, 3000);
+}, 30000);
