@@ -24,22 +24,28 @@ function displayNumbers(numbers) {
 }
 
 // Function to get user input via prompts to enter 5 numbers
-function getUserInput(callback) {
+function getUserInput(callback, userNumbers = [], index = 0) {
   let numbersDiv = document.getElementById('numbers');
   numbersDiv.style.display = 'none';
 
   // Delays user input by 100 milliseconds
   setTimeout(function () {
-    let userNumbers = [];
-    for (let i = 0; i < 5; i++) {
-      let number = parseInt(prompt(`Inserisci il numero ${(i + 1)}`));
-      userNumbers.push(number);
+    if (index < 5) {
+      let userInput = prompt(`Inserisci il numero ${(index + 1)}`);
+
+      // Check if userInput is a valid number
+      if (!isNaN(userInput) && userInput !== null) {
+        userNumbers.push(parseInt(userInput));
+        getUserInput(callback, userNumbers, index + 1);
+      } else {
+        alert('Inserisci un numero valido.');
+        getUserInput(callback, userNumbers, index);
+      }
+    } else {
+      numbersDiv.style.display = 'block';
+      // Calls the callback function with user input
+      callback(userNumbers);
     }
-
-    numbersDiv.style.display = 'block';
-
-    // Calls the callback function with user input
-    callback(userNumbers);
   }, 100);
 }
 
