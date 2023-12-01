@@ -51,14 +51,7 @@ function getUserInput(callback, userNumbers = [], index = 0) {
 
 // Function to compare the generated numbers with user input
 function compareNumbers(randomNumbers, userNumbers) {
-  let correctNumbers = [];
-  for (let i = 0; i < 5; i++) {
-    // If a generated number and a user input number are equal, they are added to the correctNumbers array
-    if (randomNumbers[i] === userNumbers[i]) {
-      correctNumbers.push(randomNumbers[i]);
-    }
-  }
-  return correctNumbers;
+  return randomNumbers.filter(number => userNumbers.includes(number));
 }
 
 // Function to update the countdown display
