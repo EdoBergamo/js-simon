@@ -4,8 +4,12 @@ function getRandomNumber(min, max) {
 
 function generateRandomNumbers() {
   let numbers = [];
-  for (let i = 0; i < 5; i++) {
-    numbers.push(getRandomNumber(1, 9));
+  while (numbers.length < 5) {
+    let randomNumber = getRandomNumber(1, 9);
+
+    if (!numbers.includes(randomNumber)) {
+      numbers.push(randomNumber)
+    }
   }
   return numbers;
 }
