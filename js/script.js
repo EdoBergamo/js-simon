@@ -55,15 +55,37 @@ function compareNumbers(randomNumbers, userNumbers) {
   return correctNumbers;
 }
 
+// Function to update the countdown display
+function updateCountdown(seconds) {
+  let countdownDiv = document.getElementById('countdown');
+  countdownDiv.textContent = `${seconds}s`;
+  if (seconds === 0) {
+    countdownDiv.textContent = ''
+  }
+}
+
 // Function to handle the entire process
 function startGame() {
   // Generate 5 unique random numbers and display them
   let randomNumbers = generateRandomNumbers();
   displayNumbers(randomNumbers);
 
+  let secondsLeft = 29;
+
+  // Countdown timer
+  let countdownInterval = setInterval(function () {
+    updateCountdown(secondsLeft);
+    secondsLeft--;
+
+    if (secondsLeft < 0) {
+      clearInterval(countdownInterval);
+    }
+  }, 1000);
+
   // After 30 seconds, asks the user to input 5 numbers and compares them with the generated ones
   setTimeout(function () {
     document.getElementById('numbers').innerText = '';
+    clearInterval(countdownInterval); // Clear the countdown interval
 
     getUserInput(function (userNumbers) {
       let correctNumbers = compareNumbers(randomNumbers, userNumbers);
@@ -80,7 +102,7 @@ function startGame() {
         alert('Nessun numero indovinato. Ritenta!'); // Output -> Nessun numero indovinato. Ritenta!
       }
     });
-  }, 30000);
+  }, (secondsLeft + 1) * 1000);
 }
 
 // Start the game
