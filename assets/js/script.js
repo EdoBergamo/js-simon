@@ -58,7 +58,7 @@ function compareNumbers(randomNumbers, userNumbers) {
 // Function to update the countdown display
 function updateCountdown(seconds) {
   let countdownDiv = document.getElementById('countdown');
-  countdownDiv.textContent = `${seconds}s`;
+  countdownDiv.innerHTML = `<i class="fas fa-stopwatch"></i> ${seconds}s`;
   if (seconds === 0) {
     countdownDiv.textContent = ''
   }

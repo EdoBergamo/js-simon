@@ -1,0 +1,28 @@
+body {
+  background-color: #f8f9fa;
+}
+
+.game-container {
+  margin-top: 50px;
+}
+
+.game-box {
+  background-color: #fff;
+  border-radius: 10px;
+  padding: 20px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.numbers-box {
+  margin-bottom: 20px;
+}
+
+.countdown {
+  font-size: 36px;
+  font-weight: bold;
+}
+
+.result-box {
+  display: none;
+  margin-top: 20px;
+}
